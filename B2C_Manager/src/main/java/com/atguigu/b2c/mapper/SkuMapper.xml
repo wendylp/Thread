@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.atguigu.b2c.mapper.SkuMapper">
+<select id="select_attr_by_class_2_id" resultMap="select_attr_by_class_2_id_map">
+	SELECT attr.id attr_id, shxm_mch, attr.shfqy, flbh2, val.`Id` val_id, attr.chjshj, val.`shxzh`, val.`shxzh_mch` FROM t_mall_attr attr 
+	INNER JOIN t_mall_value val ON attr.`Id` = val.`shxm_id`
+	<where>
+		<if test="class_2_id != 0">
+			flbh2 = #{class_2_id}
+		</if>
+		
+	</where>
+	
+</select>
+
+<resultMap type="com.atguigu.b2c.entities.OBJECT_T_MALL_ATTR" id="select_attr_by_class_2_id_map" autoMapping="true">
+	<result column="attr_id" property="id"/>
+	
+	<collection property="list_value" ofType="com.atguigu.b2c.entities.T_MALL_VALUE" autoMapping="true">
+		<result column="val_id" property="id"/>
+	</collection>
+</resultMap>
+
+
+<select id="select_spu_list" resultType="Map">
+SELECT id, shp_mch, shp_tp, flbh1, flbh2, pp_id, chjshj, shp_msh FROM t_mall_product 
+WHERE flbh1 = #{flbh1} AND flbh2 = #{flbh2} AND pp_id = #{pp_id}
+
+</select>
+
+
+<insert id="insert_sku" parameterType="com.atguigu.b2c.entities.T_MALL_SKU" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+INSERT INTO t_mall_sku (shp_id, kc, jg, sku_mch, kcdz) VALUES (#{shp_id}, #{kc}, #{jg}, #{sku_mch}, #{kcdz})
+
+</insert>
+
+
+<insert id="insert_sku_attr_value" parameterType="com.atguigu.b2c.entities.T_MALL_SKU_ATTR_VALUE">
+
+INSERT INTO t_mall_sku_attr_value (shxm_id, shxzh_id, shp_id, sku_id) VALUES (#{shxm_id}, #{shxzh_id}, #{shp_id}, #{sku_id})
+</insert>
+
+</mapper>

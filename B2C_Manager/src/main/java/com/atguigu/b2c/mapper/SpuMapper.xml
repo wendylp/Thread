@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.atguigu.b2c.mapper.SpuMapper">
+<insert id="insert_spu" parameterType="com.atguigu.b2c.entities.T_MALL_PRODUCT" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+	INSERT INTO t_mall_product (flbh1, flbh2, pp_id, shp_mch, shp_msh, shp_tp)
+	VALUES (#{flbh1}, #{flbh2}, #{pp_id}, #{shp_mch}, #{shp_msh}, #{shp_tp})
+</insert>
+
+<insert id="insert_spu_image" parameterType="Map">
+	insert into t_mall_product_image (shp_id, url) values 
+	<foreach collection="imageList" item="url" separator=",">
+	(#{shp_id}, #{url})
+	
+	</foreach>
+</insert>
+
+</mapper>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.atguigu.b2c.mapper.AttrMapper">
+<select id="select_attr_by_class_2_id" resultMap="select_attr_by_class_2_id_map">
+	SELECT attr.id attr_id, shxm_mch, attr.shfqy, flbh2, val.`Id` val_id, attr.chjshj, val.`shxzh`, val.`shxzh_mch` FROM t_mall_attr attr 
+	INNER JOIN t_mall_value val ON attr.`Id` = val.`shxm_id`
+	<where>
+		<if test="class_2_id != 0">
+			flbh2 = #{class_2_id}
+		</if>
+		
+	</where>
+	
+</select>
+
+<resultMap type="com.atguigu.b2c.entities.OBJECT_T_MALL_ATTR" id="select_attr_by_class_2_id_map" autoMapping="true">
+	<result column="attr_id" property="id"/>
+	
+	<collection property="list_value" ofType="com.atguigu.b2c.entities.T_MALL_VALUE" autoMapping="true">
+		<result column="val_id" property="id"/>
+	</collection>
+</resultMap>
+
+
+<insert id="insert_attr" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+	INSERT INTO t_mall_attr (shxm_mch, flbh2) VALUES (#{shxm_mch}, #{flbh2})
+</insert>
+
+<insert id="insert_attr_value">
+	<foreach collection="list_value" item="value" separator=";">
+	INSERT INTO t_mall_value (shxzh, shxzh_mch, shxm_id) VALUES (#{value.shxzh}, #{value.shxzh_mch}, #{attr_id})
+	</foreach>
+</insert>
+
+</mapper>
