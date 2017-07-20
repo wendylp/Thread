@@ -1,11 +1,8 @@
 package com.atguigu.b2c.service.m;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.swing.plaf.SliderUI;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -61,34 +58,23 @@ public class SkuServiceImpl implements SkuService{
 			private Date chjshj;
 			private int sku_id;
 			
-			
-				private int id;
-				private int shxm_id;
-				private int shxzh_id;
-				private int shp_id;
-				private String is_sku;
-				private Date chjshj;
-				private int sku_id;
 		 * 
 		 * 
 		 */
+
+		sku.setShp_id(shp_id);
+		skuMapper.insert_sku(sku);
+		int sku_id = sku.getId();
 		
 		
-		List<T_MALL_SKU_ATTR_VALUE> list_sku_attr_value2 = list_sku_attr_value.getList_sku_attr_value();
+		List<T_MALL_SKU_ATTR_VALUE> sku_attr_value_list = list_sku_attr_value.getList_sku_attr_value();
 		
-		for (T_MALL_SKU_ATTR_VALUE sku_attr_value : list_sku_attr_value2) {
-			
-			sku.setShp_id(shp_id);
-			skuMapper.insert_sku(sku);
-			
-			int sku_id = sku.getId();
-			//System.out.println(sku_id);
+		for (T_MALL_SKU_ATTR_VALUE sku_attr_value : sku_attr_value_list) {
 			
 			sku_attr_value.setSku_id(sku_id);
 			sku_attr_value.setShp_id(shp_id);
 			
 			skuMapper.insert_sku_attr_value(sku_attr_value);
-			
 			
 		}
 		

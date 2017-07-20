@@ -15,8 +15,11 @@
 </script>
 </head>
 <body>
+
 	
 <%-- 	${requestScope.get_attr_list } --%>
+	
+	<div id="attr_publish_inner_datagrid" class="easyui-datagrid"></div>
 	<c:forEach items="${requestScope.get_attr_list }" var="attr">
 		${attr.shxm_mch }
 		
@@ -28,7 +31,7 @@
 	</c:forEach>
 	
 	<br>
-	<a href="javascript:add_tabs('attr_add?class_2_id=${requestScope.class_2_id }&class_2_name=${requestScope.class_2_name }', '添加属性')" >添加属性</a>
+	<a href="javascript:add_tabs('attr_add?class_2_id=${sessionScope.class_2_id }&class_2_name=${sessionScope.class_2_name }', '添加属性')" >添加属性</a>
 	
 </body>
 </html>

@@ -6,13 +6,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>商品后台管理</title>
 
-<base
-	href="http://${pageContext.request.serverName }:${pageContext.request.serverPort}${pageContext.request.contextPath}/" />
-<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
-<link rel="stylesheet" type="text/css"
-	href="easyui/themes/default/easyui.css">
-<link rel="stylesheet" type="text/css" href="easyui/themes/icon.css">
-<script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
+<base href="http://${pageContext.request.serverName }:${pageContext.request.serverPort}${pageContext.request.contextPath}/" />
+	<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+	<link rel="stylesheet" type="text/css"
+		href="easyui/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="easyui/themes/icon.css">
+	<script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
 
 <script type="text/javascript">
 	//自定义函数
@@ -21,7 +20,11 @@
 		var flag = "${requestScope.flag}";
 		var url = "${requestScope.url}";
 		
+		if(flag.length != 0 && url.length != 0){
+			
 		add_tabs(url, flag);
+			
+		}
 	});
 	
 	
@@ -53,10 +56,6 @@
 	</div>
 	<div data-options="region:'west',split:true,title:'商品管理'"
 		style="width: 150px; padding: 10px;">
-		<a href="goto_spu_publish">商品spu信息发布</a><br />
-		<br /> <a href="goto_attr_publish">商品属性信息发布</a><br />
-		<br /> <a href="goto_sku_publish">商品sku信息发布</a><br />
-		<br />
 
 		<ul class="easyui-tree">
 			<li><span>商品发布管理</span>
@@ -78,7 +77,7 @@
 		<ul class="easyui-tree">
 			<li><span>缓存信息管理</span>
 				<ul>
-					<li>检索缓存管理</li>
+					<li><a href="javascript:add_tabs('goto_search_redis', '检索缓存管理')">检索缓存管理</a></li>
 					<li>用户缓存管理</li>
 				</ul></li>
 		</ul>

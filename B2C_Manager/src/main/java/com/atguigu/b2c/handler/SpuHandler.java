@@ -8,6 +8,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.atguigu.b2c.entities.T_MALL_PRODUCT;
 import com.atguigu.b2c.service.i.SpuService;
@@ -24,7 +25,8 @@ public class SpuHandler {
 		map.put("flag", flag);
 		map.put("url", url);
 		
-		return "/manager_index";
+	    return "/manager_index";
+			
 	}
 	
 	
@@ -36,7 +38,7 @@ public class SpuHandler {
 	
 	
 	@RequestMapping("spu_publish")
-	public String save_spu(T_MALL_PRODUCT product, @RequestParam("files") MultipartFile[] files){
+	public ModelAndView save_spu(T_MALL_PRODUCT product, @RequestParam("files") MultipartFile[] files){
 		
 		//商品图片名称集合
 		List<String> imageList = UploadUtils.upload(files);
@@ -44,8 +46,17 @@ public class SpuHandler {
 		product.setShp_tp(imageList.get(0));
 		spuService.save_spu(product, imageList);
 		
-		//标题名称待定
-		return "redirect:/goto_index?flag=@@@&url=goto_spu_publish";
+		String flag = "商品spu发布";
+		String url = "goto_spu_publish";
+		
+		//模型视图并携带的有参数
+		ModelAndView modelAndView = new ModelAndView("redirect:/goto_index");
+		modelAndView.addObject("flag", flag);
+		modelAndView.addObject("url", url);
+		
+		//String title = "spu";
+		//return "redirect:/goto_index?flag="+title+"&url=goto_spu_publish";
+		return modelAndView;
 	}
 
 }

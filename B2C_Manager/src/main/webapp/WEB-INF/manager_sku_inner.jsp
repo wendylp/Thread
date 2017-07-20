@@ -12,24 +12,24 @@
 <br/>
 
 	<c:forEach items="${requestScope.get_attr_list }" var="attr_list" varStatus="index">
-		<input type="checkbox" name="list_sku_attr_value[${index.index }].shxm_id" value="${attr_list.id }"/>${attr_list.shxm_mch }
+		<input class="attr${index.index }" type="checkbox" name="list_sku_attr_value[${index.index }].shxm_id" value="${attr_list.id }"/>${attr_list.shxm_mch }
 	</c:forEach>
 
 	<br/>
 	<c:forEach items="${requestScope.get_attr_list }" var="attr_list" varStatus="index">
 		
 		<c:forEach items="${attr_list.list_value }" var="value">
-			<input class="attr${index.index }" type="radio" name="list_sku_attr_value[${index.index }].shxzh_id" value="${value.id }"/>${value.shxzh }${value.shxzh_mch }
+			<input type="radio" name="list_sku_attr_value[${index.index }].shxzh_id" value="${value.id }"/>${value.shxzh }${value.shxzh_mch }
 		</c:forEach>
 		<br/>
 	</c:forEach>
-
-	<br/><br/>
+	
+	<hr>
 	库存：<input type="text" name="kc"/><br><br>
 	价格：<input type="text" name="jg"/><br><br>
 	名称：<input type="text" name="sku_mch"/><br><br>
 	地址：<input type="text" name="kcdz"/><br><br/>
-	
+
 	<input type="submit" value="发布库存信息"/>
 	
 </body>

@@ -40,13 +40,13 @@
 </head>
 <body>
 
-${requestScope.class_2_id } ${requestScope.class_2_name }<br>
-<a href="javascript:spu_attr_table_add()">添加商品属性</a><br/><br/>
+商品id：${sessionScope.class_2_id }  商品名称：${sessionScope.class_2_name }<br>
 
 <form action="save_attr" method="post">
-	<input type="hidden" name="class_2_id" value="${requestScope.class_2_id }"/>
-	<input type="hidden" name="class_2_name" value="${requestScope.class_2_name }"/>
+	<input type="hidden" name="class_2_id" value="${sessionScope.class_2_id }"/>
+	<input type="hidden" name="class_2_name" value="${sessionScope.class_2_name }"/>
 	
+	<a href="javascript:spu_attr_table_add()">添加商品属性</a><br/><br/>
 	<div id="attr_add_table">
 		<table border="1" id="attr_add_table_0">
 			<tr>

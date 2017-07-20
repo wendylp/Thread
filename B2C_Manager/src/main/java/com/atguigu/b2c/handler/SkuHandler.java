@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.atguigu.b2c.entities.MODEL_T_MALL_SKU_ATTR_VALUE;
 import com.atguigu.b2c.entities.OBJECT_T_MALL_ATTR;
@@ -24,7 +25,6 @@ public class SkuHandler {
 	
 	@RequestMapping("goto_sku_publish")
 	public String go_to_publish(){
-		
 		
 		return "/manager_sku_publish";
 	}
@@ -58,11 +58,18 @@ public class SkuHandler {
 	
 	
 	@RequestMapping("save_sku")
-	public String save_sku(Integer shp_id, MODEL_T_MALL_SKU_ATTR_VALUE list_sku_attr_value, T_MALL_SKU sku){
-		//传惨为空会出现异常
+	public ModelAndView save_sku(Integer shp_id, MODEL_T_MALL_SKU_ATTR_VALUE list_sku_attr_value, T_MALL_SKU sku){
+		//传参为空会出现异常
 		skuService.save_sku(shp_id, list_sku_attr_value, sku);
 	
-		return "redirect:/goto_sku_publish";
+		String flag = "商品sku信息发布";
+		String url = "goto_sku_publish";
+		
+		ModelAndView modelAndView = new ModelAndView("redirect:/goto_index");
+		modelAndView.addObject("flag", flag);
+		modelAndView.addObject("url", url);
+		
+		return modelAndView;
 		
 	}
 }

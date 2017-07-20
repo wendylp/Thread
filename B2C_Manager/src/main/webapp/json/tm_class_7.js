@@ -1,1 +1,13 @@
-[{"id":1,"ppmch":"华为"},{"id":5,"ppmch":"lenovo"},{"id":15,"ppmch":"华为"},{"id":22,"ppmch":"美的Midea"}]
+[ {
+	"id" : 8,
+	"ppmch" : "小米"
+}, {
+	"id" : 2,
+	"ppmch" : "lenovo"
+}, {
+	"id" : 18,
+	"ppmch" : "华为"
+}, {
+	"id" : 22,
+	"ppmch" : "美的Midea"
+} ]

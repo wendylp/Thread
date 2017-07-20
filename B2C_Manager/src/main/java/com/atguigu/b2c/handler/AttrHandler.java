@@ -3,10 +3,13 @@ package com.atguigu.b2c.handler;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.atguigu.b2c.entities.MODEL_OBJECT_T_MALL_ATTR;
@@ -26,7 +29,7 @@ public class AttrHandler {
 	}
 	
 	
-	@RequestMapping("get_attr_class_2")
+/*	@RequestMapping("get_attr_class_2")
 	public String get_attr_class_2(@RequestParam("class_2_id") Integer class_2_id, 
 								   @RequestParam("class_2_name") String class_2_name,
 									Map<String, Object> map){
@@ -41,6 +44,28 @@ public class AttrHandler {
 		
 		return "/manager_attr_inner";
 	}
+	*/
+	
+	@ResponseBody //返回json
+	@RequestMapping("get_attr_class_2_json")
+	public List<OBJECT_T_MALL_ATTR> get_attr_class_2(@RequestParam("class_2_id") Integer class_2_id, 
+								   @RequestParam("class_2_name") String class_2_name,
+									HttpSession session){
+		
+		List<OBJECT_T_MALL_ATTR> get_attr_list = attrService.get_attr_by_class_2_id(class_2_id);
+		
+		
+	/*	map.put("get_attr_list", get_attr_list);
+		map.put("class_2_name", class_2_name);
+		
+		map.put("class_2_id", class_2_id);
+		*/
+		
+		session.setAttribute("class_2_name", class_2_name);
+		session.setAttribute("class_2_id", class_2_id);
+		
+		return get_attr_list;
+	}
 	
 	
 	@RequestMapping("attr_add")
@@ -52,6 +77,7 @@ public class AttrHandler {
 		map.put("class_2_name", class_2_name);
 		
 		return "/manager_attr_add";
+		//return "redirect:/goto_attr_publish";
 	}
 	
 	
@@ -62,9 +88,11 @@ public class AttrHandler {
 	
 	attrService.save_attr(list_attr, class_2_id);
 	
-	ModelAndView modelAndView = new ModelAndView("redirect:/attr_add");
-	modelAndView.addObject("class_2_id", class_2_id);
-	modelAndView.addObject("class_2_name", class_2_name);
+	String flag = "商品属性发布";
+	String url = "goto_attr_publish";
+	ModelAndView modelAndView = new ModelAndView("redirect:/goto_index");
+	modelAndView.addObject("flag", flag);
+	modelAndView.addObject("url", url);
 	
 	return modelAndView;
 		

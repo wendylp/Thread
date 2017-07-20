@@ -1,1 +1,16 @@
-[{"id":2,"ppmch":"apple"},{"id":6,"ppmch":"lenovo"},{"id":16,"ppmch":"华为"},{"id":18,"ppmch":"宏基"},{"id":20,"ppmch":"外星人"}]
+[ {
+	"id" : 1,
+	"ppmch" : "apple"
+}, {
+	"id" : 2,
+	"ppmch" : "lenovo"
+}, {
+	"id" : 18,
+	"ppmch" : "华为"
+}, {
+	"id" : 19,
+	"ppmch" : "宏基"
+}, {
+	"id" : 20,
+	"ppmch" : "外星人"
+} ]

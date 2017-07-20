@@ -12,15 +12,43 @@
 <script type="text/javascript">
 	$(function(){
 		
-		$.getJSON("json/class_1.js", function(data){
+		$('#spu_publish_class_1').combobox({    
+		    url:'json/class_1.js',    
+		    valueField:'id',   //value属性
+		    textField:'flmch1' , //文本值属性
+		    width:'100',  //不能加px
+		    value:'请选择......',  //默认值
+		    onSelect:function(){
+		    	var class_1_id = $(this).combobox('getValue');
+		    	$('#spu_publish_class_2').combobox({
+		    		url:'json/class_2_' + class_1_id + '.js',     
+		 		    valueField:'id',   //value属性
+		 		    textField:'flmch2' , //文本值属性
+		 		    width:'100',  //不能加px
+		 		    value:'请选择......'  //默认值
+		    	});
+		    	
+		    	$("#spu_publish_tm").combobox({
+		    		url:'json/tm_class_' + class_1_id + '.js',     
+		 		    valueField:'id',   //value属性
+		 		    textField:'ppmch' , //文本值属性
+		 		    width:'100',  //不能加px
+		 		    value:'请选择......'  //默认值	
+		    		
+		    	});
+		    	
+		    }
+		}); 
+		
+		/* $.getJSON("json/class_1.js", function(data){
 			$(data).each(function(i, json){
 				$("#spu_publish_class_1").append("<option value="+json.id+">"+json.flmch1+"</option>");
 			});
-		});
+		}); */
 		
 	});
 	
-	function spu_publish_change_class_2(){
+/* 	function spu_publish_change_class_2(){
 		
 		//先获取value属性值
 		var class_1_id = $("#spu_publish_class_1 option:selected").val();
@@ -38,8 +66,8 @@
 		 spu_publish_change_tm(); //调用下面的函数
 		 
 	}
-		
-	function spu_publish_change_tm(){
+		 */
+/* 	function spu_publish_change_tm(){
 		
 		//先获取value属性值
 		var class_1_id = $("#spu_publish_class_1 option:selected").val();
@@ -55,7 +83,7 @@
 		}); 
 		
 	}
-	
+	 */
 	
 	function spu_publish_image_button(index){
 		
@@ -105,25 +133,29 @@
 	<form action="spu_publish" method="post" enctype="multipart/form-data">
 		
 		<div class="easyui-layout" data-options="fit:true" style="width:700px;height:350px;">
-			<div data-options="region:'north',split:true,border:true" style="height:100px">
-				<!-- this.value -->
-				<select id="spu_publish_class_1" name="flbh1" onChange="spu_publish_change_class_2()"></select>
+			<div data-options="region:'north',split:true,border:true" style="height:50px">
+				<h2>发布的商品信息</h2>
+			</div>
+			<div data-options="region:'west',split:true,border:true" style="width:200px">
+				一级分类：<br>
+				<select id="spu_publish_class_1" class="easyui-combobox" name="flbh1" ></select>
 				<br/><br/>
-				<select id="spu_publish_class_2" name="flbh2"></select>
+				二级分类：<br/>
+				<select id="spu_publish_class_2" class="easyui-combobox" name="flbh2"></select>
 				<br/><br/>
-				<select id="spu_publish_tm" name="pp_id"></select>
+				品牌：<br/>
+				<select id="spu_publish_tm" class="easyui-combobox" name="pp_id"></select>
 				<br/><br/>
 			
-			</div>
-			<div data-options="region:'west',split:true,border:true" style="width:500px">
-				发布商品名称：<input type="text" name="shp_mch"/>
-				<br/><br/>
-				发布商品描述：<input type="text" name="shp_msh"/>
-				<br/><br/>
 			
 			</div>
 			
 			<div data-options="region:'center',border:true">
+			
+				发布的商品名称：<input type="text" name="shp_mch"/>
+				<br/><br/>
+				发布的商品描述：<input type="text" name="shp_msh"/>
+				<br/><br/>
 			
 				商品图片：<span id="span_div">你还可以上传<span id="image_length">5</span>张图片</span>
 				<div id="image_div">

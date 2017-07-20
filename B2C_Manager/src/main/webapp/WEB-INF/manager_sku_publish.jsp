@@ -11,11 +11,13 @@
 
 	$(function(){
 	
-		$.getJSON("json/class_1.js", function(data){
+		 $.getJSON("json/class_1.js", function(data){
 			$(data).each(function(i, json){
 				$("#sku_publish_class_1").append("<option value="+json.id+">"+json.flmch1+"</option>");
 			});
-		});
+		}); 
+		
+		
 	
 	});
 
@@ -63,6 +65,7 @@
 		
 		$.post("get_sku_class_2", {"class_2_id":class_2_id, "class_2_name":class_2_name}, function(data){
 			
+			//
 			$("#sku_publish_inner").html(data);
 			
 		});
@@ -88,29 +91,44 @@
 	}
 	
 	
-	$(":checkbox").click(function(){
+	$("#sku_publish_class_2").click(function(){
 		
-		$("attr${index.index }").toggle();
+		$(".attr${index.index }").hide();
 		
 		
 	});
 </script>
 </head>
 <body>
-
-	<form action="save_sku" method="post">
-		<select id="sku_publish_class_1" name="flbh1"
-			onchange="sku_publish_change_class_2()"></select>
-		<br/><br/>
-		<select id="sku_publish_class_2" name="flbh2" onchange="sku_publish_get_sku(this.value)"></select>
-		<br/><br/>
-		<select id="sku_publish_tm" name="pp_id" onchange="sku_publish_get_spu(this.value)"></select>
-		<br/><br/>
-		<select id="sku_publish_tm_spu" name="shp_id"></select>
+<form action="save_sku" method="post">
+	<div class="easyui-layout" data-options="fit:true" style="width:700px;height:350px;">
+		<div data-options="region:'north',split:true,border:true" style="height:50px">
+			<h2>商品sku信息发布</h2>
+		</div>
 		
-		<!-- 内嵌页面 -->
-		<div id="sku_publish_inner"></div>
-		<br/><br/>
+		<div data-options="region:'west',split:true,border:true" style="width:200px;height:350px;">
+			一级分类：<br/>
+			<select id="sku_publish_class_1" name="flbh1"
+			onchange="sku_publish_change_class_2()"></select>
+			<br/><br/>
+			二级分类：<br/>
+			<select id="sku_publish_class_2" name="flbh2" onchange="sku_publish_get_sku(this.value)"></select>
+			<br/><br/>
+			品牌：<br/>
+			<select id="sku_publish_tm" name="pp_id" onchange="sku_publish_get_spu(this.value)"></select>
+			<br/><br/>
+			商品名称：<br/>
+			<select id="sku_publish_tm_spu" name="shp_id"></select>
+		
+		</div>
+		<div data-options="region:'center',border:true">
+			<!-- 内嵌页面 -->
+			<div id="sku_publish_inner"></div>
+			<br/><br/>
+		</div>
+	</div>
 	</form>
+	
+		
 </body>
 </html>
